@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <title>My App</title>
+</head> 
+<body>
+    <div id="app">
+        <header>
+            <h1 v-text ="Petstore">MY PetStore </h1>
+
+           <button v-on: click= "showCheckout"> 
+            {{Itemsinthecart}}
+            <span class="fas fa-cart-arrow-down">
+            Checkout
+            </button>
+        </header>
+
+            <!-- this works for showing picture and the discription -->
+           <main>
+            <div v-if="showProducts">
+                <figure>
+                    <img v-bind:src="product.Image" alt="This item is cat food" style="width:20%;">
+                </figure>
+                <h2 v-text="product.title"></h2>
+                <p v-text="product.Description"></p>
+                <p>Price:{{product.Price}} </p>
+                <button v-if="canaddtothecart" v-on:click="addItem">Add to the cart</button>
+                <div v-else>
+                    <button disabled>Add to the cart</button>
+                    you have added all the items in the cart
+                </div>
+            </div>
+            <div v-else>
+                <H1>Welcome to the Checkout page</H1>
+            </div>
+            </main>
+
+        </div>
+        <!-- this works for showing picture and the discription -->
+        <script>
+            let webstore = new Vue ({
+                el:"#app",
+                 data: {
+                    Petstore: "MY PetStore",
+                     showProducts: true ,
+                    product: {
+                        id: 1001,
+                        title: "cat Food , 10 LB Bag",
+                        Description: "A 10LB bag with healty neutritions for cats",
+                        Price: 25,
+                        Image: "/Images/product.jpg",
+                        availableInventory: 5
+                    },
+                    cart:[]
+                },
+                methods : {
+                    showCheckout: function(){
+                                  this.showProducts = !this.showProducts ? true : false ;
+                    },
+                    addItem: function ()
+                    {
+                        this.cart.push(this.product.id);
+                    }
+                },
+                computed: {
+                   Itemsinthecart: function () 
+                    {
+                      return this.cart.length || "";
+                    },
+                    canaddtothecart : function(){
+                        return this.product.availableInventory > this.Itemsinthecart;
+                    }
+                }
+
+            })
+
+        </script>
+    
+</body>
+</html>

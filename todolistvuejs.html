@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js" ></script>
+</head>
+<body>
+    <!-- ToDO List APP Frontend  -->
+    <div id="app">
+        <h1>MY TODO LIST</h1>
+        <input type="text" id="newtask" v-model="newtask">
+        <button id="addbutton" v-on:click = "additem">ADD</button>
+        <ul id="tasklist">
+            <li>Task1</li>
+            <li>Task2</li>
+            <li>Task3</li>
+        </ul>
+    </div>
+<!-- backend of todolist with vuejs -->
+<script>    
+          let app =new Vue({
+             el:'#app',
+             data: {newtask:""}, 
+             methods :{
+                additem:function(){
+                     let taskitem = document.createElement("li");
+                     document.getElementById("tasklist").appendChild(taskitem);
+                     taskitem.innerText = app.newtask;
+                     app.newtask = "";
+                }
+             }
+          })
+</script>
+</body>
+</html>

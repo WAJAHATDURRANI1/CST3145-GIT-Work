@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>TODO LIST</title>
+</head>
+
+<body>
+    <!-- ToDO List APP Frontend  -->
+    <div id="app">
+        <h1>MY TODO LIST</h1>
+        <input type="text" id="newtask"><button id="addbutton">ADD</button>
+        <ul id="tasklist">
+
+        </ul>
+
+    </div>
+    <!-- BACKEND FOR  TODO LIST -->
+
+    <script>
+        let tasks = ["task1","task2","task3"];
+        let addbutton = document.getElementById("addbutton");
+        let taskList = document.getElementById("tasklist");
+
+        addbutton.onclick = function () {
+
+            let taskField = document.getElementById("newtask");
+            additem(taskField.value);
+            taskField.value = "";
+
+        }
+        
+        for (let index = 0; index <tasks.length; index++) {
+            const element = tasks[index];
+            
+            additem(element)
+        }
+
+        function additem(myText) {
+
+            let taskitem = document.createElement("li");
+            taskitem.innerText = myText;
+            tasklist.appendChild(taskitem);
+            
+        }
+
+    </script>
+
+  
+
+
+</body>
+
+</html>
